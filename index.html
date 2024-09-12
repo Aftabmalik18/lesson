@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson Plan Application</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        h1 {
+            color: #fff;
+            background: #4CAF50;
+            padding: 20px;
+            margin: 0;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .dropdown-container {
+            text-align: center;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            border: 2px solid #4CAF50;
+            border-radius: 5px;
+            background-color: #fafafa;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        #back-button {
+            background-color: #FF5722;
+        }
+
+        #back-button:hover {
+            background-color: #e64a19;
+        }
+
+        .plan-container {
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .plan-container h2 {
+            color: #4CAF50;
+            margin-bottom: 15px;
+        }
+
+        .plan-container p {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        .plan-container strong {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Lesson Plan Application</h1>
+
+    <div class="container">
+        <div class="dropdown-container">
+            <!-- Dropdown for selecting Class -->
+            <select id="class" onchange="selectClass()">
+                <option value="">--Select Class--</option>
+                <option value="1">Class 1</option>
+                <option value="2">Class 2</option>
+                <option value="3">Class 3</option>
+                <option value="4">Class 4</option>
+                <option value="5">Class 5</option>
+                <option value="6">Class 6</option>
+                <option value="7">Class 7</option>
+                <option value="8">Class 8</option>
+                <option value="9">Class 9</option>
+                <option value="10">Class 10</option>
+            </select>
+
+            <!-- Dropdown for selecting Subject -->
+            <select id="subject" style="display:none;" onchange="selectSubject()">
+                <option value="">--Select Subject--</option>
+            </select>
+
+            <!-- Dropdown for selecting Unit -->
+            <select id="unit" style="display:none;" onchange="selectUnit()">
+                <option value="">--Select Unit--</option>
+            </select>
+
+            <!-- Dropdown for selecting Day -->
+            <select id="day" style="display:none;" onchange="selectDay()">
+                <option value="">--Select Day--</option>
+            </select>
+
+            <button id="back-button" style="display:none;" onclick="goBack()">Back</button>
+        </div>
+
+        <div id="day-plan" class="plan-container" style="display:none;"></div>
+    </div>
+
+    <script>
+        let subjects = {
+            "1": ["Math", "English", "Science"],
+            "2": ["Math", "English", "Science"],
+            "3": ["Math", "English", "Science", "Social Studies"],
+            "4": ["Math", "English", "Science", "Social Studies"],
+            "5": ["Math", "English", "Science", "Social Studies"],
+            "6": ["Math", "English", "Science", "Social Studies"],
+            "7": ["Math", "English", "Science", "Social Studies"],
+            "8": ["Math", "English", "Science", "Social Studies"],
+            "9": ["Math", "English", "Science", "Social Studies"],
+            "10": ["English", "Math", "Science", "Social Studies"]
+        };
+
+        let units = {
+            "Math": ["Unit 1: Numbers", "Unit 2: Shapes", "Unit 3: Patterns", "Unit 4: Measurements"],
+            "English": ["Unit 1: Grammar", "Unit 2: Writing", "Unit 3: Reading", "Unit 4: Vocabulary"],
+            "Science": ["Unit 1: Living Things", "Unit 2: Non-Living Things", "Unit 3: Earth", "Unit 4: Water"],
+            "Social Studies": ["Unit 1: Geography", "Unit 2: History", "Unit 3: Civics", "Unit 4: Economics"]
+        };
+
+        let dayPlans = {
+            "Unit 1: Grammar": {
+                1: {
+                    "learningIndicators": "Students will understand the central theme of the poem and the key ideas expressed by Rabindranath Tagore, such as freedom, knowledge, and broad-mindedness.",
+                    "teacherLed": `Introduce the poet: Rabindranath Tagore and his contribution to Indian literature.
+                                    Contextualize the poem: Explain the historical context (British rule, desire for freedom).
+                                    Read the poem aloud: Use clear pronunciation and emphasize important words to capture students' attention.
+                                    Explain difficult words and phrases: Terms like "narrow domestic walls," "tireless striving," and "dead habit" should be broken down with examples.
+                                    Discuss the poem’s tone: Mention that it is a prayer-like appeal for a better nation.`,
+                    "individualPractice": `Provide a worksheet where students:
+                                    - Match difficult words with their meanings.
+                                    - Answer short questions like "What does the poet pray for?"
+                                    - Complete sentences based on their understanding of the poem (e.g., "Where the mind is without ___ and the head is held ___").
+                                    - Monitor students and assist as needed during this exercise.`,
+                    "groupPractice": `Divide the class into small groups and assign each group a different line from the poem.
+                                    Each group will:
+                                    - Discuss the meaning of their line.
+                                    - Present their interpretation to the class, using examples or illustrations (if possible).
+                                    Encourage teamwork and collaboration in understanding the poem’s deeper meanings.`,
+                    "conclusion": `Ask questions to review the poem’s central ideas:
+                                    - What is the poet asking for?
+                                    - How does the poet envision the ideal state of action and thought in a country?
+                                    - Why does the poet want his country to awaken from the "dreary desert sand of dead habit"?
+                                    Summarize the poem’s themes: Freedom of mind, education for all, breaking social barriers.`,
+                    "homework": `Assign students to:
+                                    - Write a few lines about what freedom means to them.
+                                    - Re-read the poem and underline phrases that stand out to them.
+                                    - Prepare a response to the question: "What does Tagore want for his country?"`
+                }
+            }
+        };
+
+        function selectClass() {
+            let selectedClass = document.getElementById('class').value;
+            let subjectDropdown = document.getElementById('subject');
+            subjectDropdown.style.display = "block";
+            subjectDropdown.innerHTML = "<option value=''>--Select Subject--</option>";
+
+            if (subjects[selectedClass]) {
+                subjects[selectedClass].forEach(subject => {
+                    let option = document.createElement("option");
+                    option.text = subject;
+                    option.value = subject;
+                    subjectDropdown.add(option);
+                });
+            }
+        }
+
+        function selectSubject() {
+            let selectedSubject = document.getElementById('subject').value;
+            let unitDropdown = document.getElementById('unit');
+            unitDropdown.style.display = "block";
+            unitDropdown.innerHTML = "<option value=''>--Select Unit--</option>";
+
+            if (units[selectedSubject]) {
+                units[selectedSubject].forEach(unit => {
+                    let option = document.createElement("option");
+                    option.text = unit;
+                    option.value = unit;
+                    unitDropdown.add(option);
+                });
+            }
+        }
+
+        function selectUnit() {
+            let selectedUnit = document.getElementById('unit').value;
+            let dayDropdown = document.getElementById('day');
+            dayDropdown.style.display = "block";
+            dayDropdown.innerHTML = "<option value=''>--Select Day--</option>";
+
+            if (dayPlans[selectedUnit]) {
+                for (let day = 1; day <= 5; day++) {
+                    let option = document.createElement("option");
+                    option.text = "Day " + day;
+                    option.value = day;
+                    dayDropdown.add(option);
+                }
+            }
+        }
+
+        function selectDay() {
+            let selectedClass = document.getElementById('class').value;
+            let selectedSubject = document.getElementById('subject').value;
+            let selectedUnit = document.getElementById('unit').value;
+            let selectedDay = document.getElementById('day').value;
+
+            let dayPlanContainer = document.getElementById('day-plan');
+            let backButton = document.getElementById('back-button');
+            
+            if (selectedClass && selectedSubject && selectedUnit && selectedDay) {
+                let plan = dayPlans[selectedUnit] && dayPlans[selectedUnit][selectedDay];
+                if (plan) {
+                    dayPlanContainer.style.display = "block";
+                    backButton.style.display = "block";
+                    dayPlanContainer.innerHTML = `
+                        <h2>Day ${selectedDay} Plan for ${selectedSubject} - ${selectedUnit}</h2>
+                        <p><strong>Learning Indicators:</strong> ${plan.learningIndicators}</p>
+                        <p><strong>Teacher Led:</strong> ${plan.teacherLed}</p>
+                        <p><strong>Individual Practice:</strong> ${plan.individualPractice}</p>
+                        <p><strong>Group Practice:</strong> ${plan.groupPractice}</p>
+                        <p><strong>Conclusion:</strong> ${plan.conclusion}</p>
+                        <p><strong>Homework:</strong> ${plan.homework}</p>
+                    `;
+                } else {
+                    dayPlanContainer.innerHTML = "No plan available for the selected options.";
+                }
+            } else {
+                dayPlanContainer.style.display = "none";
+                backButton.style.display = "none";
+            }
+        }
+
+        function goBack() {
+            document.getElementById('class').value = "";
+            document.getElementById('subject').value = "";
+            document.getElementById('unit').value = "";
+            document.getElementById('day').value = "";
+            document.getElementById('subject').style.display = "none";
+            document.getElementById('unit').style.display = "none";
+            document.getElementById('day').style.display = "none";
+            document.getElementById('day-plan').style.display = "none";
+            document.getElementById('back-button').style.display = "none";
+        }
+    </script>
+</body>
+</html>
